@@ -1,10 +1,17 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import NavTab from '../components/NavTab';
+import DoctorCard from '../components/DoctorCard';
 export default function SchedulePage() {
+    const scheduleList = ['1', '2', '3', '4', '5', '6', '7'];
     return (
         <View style={styles.container}>
             <NavTab />
-            <Text style={styles.text}>Near Doctor</Text>
+            <FlatList
+                style={styles.nearDoctor}
+                data={scheduleList}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }) => <DoctorCard key={index} />}
+            />
         </View>
     );
 }
