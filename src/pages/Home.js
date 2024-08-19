@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         padding: 24,
+		
     },
     nearDoctor: {
         display: 'flex',

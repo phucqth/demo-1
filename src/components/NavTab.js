@@ -6,42 +6,56 @@ import {
     View,
     Platform,
 } from 'react-native';
+import { normalize } from '../ultis/normalize';
 
-const NavTab = () => {
+const NavTab = ({ ...props }) => {
     return (
-        <FlatList
-            data={[
-                'Canceled Schedule',
-                'Completed schedule',
-                'Upcoming schedule',
-            ]}
-            showsHorizontalScrollIndicator={Platform.OS === 'web'}
-            horizontal
-            contentContainerStyle={styles.listContainer}
-            renderItem={({ item, index }) => (
-                <Pressable onPress={() => {}} key={index}>
-                    <View
-                        style={
-                            index === 1
-                                ? styles.listItemActive
-                                : styles.listItem
-                        }
-                    >
-                        <Text
+        <View style={styles.container}>
+            <FlatList
+                {...props}
+                data={[
+                    'Canceled Schedule',
+                    'Completed schedule',
+                    'Upcoming schedule',
+                ]}
+                showsHorizontalScrollIndicator={Platform.OS === 'web'}
+                horizontal
+                contentContainerStyle={styles.listContainer}
+                renderItem={({ item, index }) => (
+                    <Pressable onPress={() => {}} key={index}>
+                        <View
                             style={
-                                index === 1 ? styles.textActive : styles.text
+                                index === 1
+                                    ? styles.listItemActive
+                                    : styles.listItem
                             }
                         >
-                            {item}
-                        </Text>
-                    </View>
-                </Pressable>
-            )}
-        />
+                            <Text
+                                // adjustsFontSizeToFit
+                                style={
+                                    index === 1
+                                        ? styles.textActive
+                                        : styles.text
+                                }
+                            >
+                                {item}
+                            </Text>
+                        </View>
+                    </Pressable>
+                )}
+            />
+        </View>
     );
 };
 
+const tabTextSize = normalize(16);
 const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        alignItems: 'center',
+        paddingVertical: 2,
+        // backgroundColor: '#000',
+    },
     listContainer: {
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10,
@@ -55,13 +69,15 @@ const styles = StyleSheet.create({
         marginRight: 12,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: 32,
         paddingVertical: 12,
+        paddingHorizontal: 32,
         backgroundColor: '#FAFAFA',
     },
     text: {
-        fontSize: 16,
+        fontSize: tabTextSize,
         color: '#8696BB',
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
     listItemActive: {
         borderRadius: 20,
@@ -73,9 +89,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(99,180,255,0.1)',
     },
     textActive: {
-        fontSize: 16,
+        fontSize: tabTextSize,
         fontWeight: 'bold',
         color: '#4894FE',
+        textAlignVertical: 'center',
+        textAlign: 'center',
     },
 });
 export default NavTab;
