@@ -18,9 +18,10 @@ const NavTab = ({ ...props }) => {
                     'Completed schedule',
                     'Upcoming schedule',
                 ]}
-                showsHorizontalScrollIndicator={Platform.OS === 'web'}
+                style={styles.listContainer}
+                showsHorizontalScrollIndicator={false}
                 horizontal
-                contentContainerStyle={styles.listContainer}
+                contentContainerStyle={styles.innerListContainer}
                 renderItem={({ item, index }) => (
                     <Pressable onPress={() => {}} key={index}>
                         <View
@@ -31,7 +32,7 @@ const NavTab = ({ ...props }) => {
                             }
                         >
                             <Text
-                                // adjustsFontSizeToFit
+                                adjustsFontSizeToFit
                                 style={
                                     index === 1
                                         ? styles.textActive
@@ -48,15 +49,16 @@ const NavTab = ({ ...props }) => {
     );
 };
 
-const tabTextSize = normalize(16);
+const tabTextSize = 16;
+// const tabTextSize = normalize(16);
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        alignItems: 'center',
-        paddingVertical: 2,
-        // backgroundColor: '#000',
+        paddingVertical: 10,
     },
-    listContainer: {
+    listContainer: { width: '100%' },
+
+    innerListContainer: {
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10,
         paddingHorizontal: 20,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
         fontSize: tabTextSize,
         color: '#8696BB',
         textAlign: 'center',
-        textAlignVertical: 'center',
+        verticalAlign: 'center',
     },
     listItemActive: {
         borderRadius: 20,
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
         fontSize: tabTextSize,
         fontWeight: 'bold',
         color: '#4894FE',
-        textAlignVertical: 'center',
+        verticalAlign: 'center',
         textAlign: 'center',
     },
 });

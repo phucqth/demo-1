@@ -5,9 +5,9 @@ import HomePage from './src/pages/Home';
 export default function App() {
     return (
         <SafeAreaView style={styles.container}>
-            {/* <SchedulePage /> */}
-            <HomePage />
-            <Navigator />
+            {/* <SchedulePage />
+            <HomePage /> */}
+            {/* <Navigator /> */}
         </SafeAreaView>
     );
 }

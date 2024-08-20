@@ -1,14 +1,51 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import NavigatorButton from './NavigatorButton';
 
-const Navigator = () => {
+const Navigator = ({ state, descriptors, navigation }) => {
     return (
         <View style={styles.tabBar}>
-            <View style={styles.tabItem}>
-                <Text style={styles.text}>Home</Text>
-            </View>
-            <View style={styles.tabItemActive}>
-                <Text style={styles.text}>Schedule</Text>
-            </View>
+            {state.routes.map((route, index) => {
+                const { options } = descriptors[route.key];
+                const label =
+                    options.tabBarLabel !== undefined
+                        ? options.tabBarLabel
+                        : options.title !== undefined
+                        ? options.title
+                        : route.name;
+
+                const isFocused = state.index === index;
+
+                const onPress = () => {
+                    const event = navigation.emit({
+                        type: 'tabPress',
+                        target: route.key,
+                        canPreventDefault: true,
+                    });
+
+                    if (!isFocused && !event.defaultPrevented) {
+                        navigation.navigate(route.name, route.params);
+                    }
+                };
+
+                const onLongPress = () => {
+                    navigation.emit({
+                        type: 'tabLongPress',
+                        target: route.key,
+                    });
+                };
+
+                return (
+                    <NavigatorButton
+                        key={route.name}
+                        style={styles.tabbarItem}
+                        onPress={onPress}
+                        onLongPress={onLongPress}
+                        isFocused={isFocused}
+                        routeName={route.name}
+                        label={label}
+                    />
+                );
+            })}
         </View>
     );
 };
@@ -17,46 +54,13 @@ export default Navigator;
 
 const styles = StyleSheet.create({
     tabBar: {
-        backgroundColor: '#000',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
+        width: '100%',
+        backgroundColor: '#fff',
         display: 'flex',
-        position: 'absolute',
         alignItems: 'center',
-        paddingBottom: 0,
-        bottom: 20,
-        left: 24,
-        right: 24,
-        elevation: 0,
-        borderRadius: 28,
-        height: 50,
-        marginVertical: 0,
+        paddingHorizontal: 24,
+        paddingVertical: 16,
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    tabItem: {
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '50%',
-        // borderRadius: 28,
-    },
-    tabItemActive: {
-        height: '100%',
-        backgroundColor: 'rgba(99,180,255,0.2)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '50%',
-        borderRadius: 28,
-    },
-    text: {
-        color: '#fff',
     },
 });

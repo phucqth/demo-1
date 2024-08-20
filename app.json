@@ -11,17 +11,21 @@
 			"resizeMode": "contain",
 			"backgroundColor": "#ffffff"
 		},
+		"scheme": "demo-scheme",
 		"ios": {
-			"supportsTablet": true
+			"supportsTablet": true,
+			"bundleIdentifier": "com.pthuong.demo"
 		},
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
-			}
+			},
+			"package": "com.pthuong.demo"
 		},
 		"web": {
-			"favicon": "./assets/favicon.png"
+			"favicon": "./assets/favicon.png",
+			"bundler": "metro"
 		},
 		"plugins": [
 			[
@@ -32,6 +36,12 @@
 					]
 				}
 			]
-		]
+		],
+		"extra": {
+			"eas": {
+				"projectId": "cc845480-1746-4f9c-ac1b-09d6e53b8792"
+			}
+		},
+		"owner": "pthuong"
 	}
 }

@@ -1,13 +1,28 @@
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { useRouter } from 'expo-router';
+import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
 
 const WellcomeTitle = () => {
+    const router = useRouter();
+
+    const handleAvatarPress = () => {
+        router.push('/login');
+    };
     return (
         <View style={styles.container}>
             <View>
                 <Text style={styles.wellcomeString}>Wellcome,</Text>
                 <Text style={styles.nameString}>Jakub Scott</Text>
             </View>
-            <Image source='https://i.pravatar.cc/100' style={styles.avatar} />
+            <Pressable
+                onPress={() => {
+                    handleAvatarPress();
+                }}
+            >
+                <Image
+                    source='https://i.pravatar.cc/100'
+                    style={styles.avatar}
+                />
+            </Pressable>
         </View>
     );
 };

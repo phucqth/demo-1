@@ -1,11 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
-
+import { useRef } from 'react';
 const Search = () => {
+    const inputRef = useRef(null);
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onPress={() => inputRef.current.focus()}>
             <Ionicons name='search' size={24} color='#8696BB' />
-            <TextInput placeholder='Search' style={styles.searchInput} />
+            <TextInput
+                placeholder='Search'
+                style={styles.searchInput}
+                ref={inputRef}
+            />
         </View>
     );
 };
